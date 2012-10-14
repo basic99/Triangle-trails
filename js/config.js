@@ -19,21 +19,19 @@ var config = {
         "id": "google_sat",
         "name": "Google Satellite",
         "type": google.maps.MapTypeId.SATELLITE,
-        "wmsurl": "",
-        "maxZoom": 18,
-        "minZoom": 9,
+        "wmsurl": "",       
         "isVisible": false,
-        "isBaseLayer": true
+        "isBaseLayer": true,
+        "numZoomLevels": 19
     },
     {
         "id": "google_ter",
         "name": "Google Terrain",
         "type": google.maps.MapTypeId.TERRAIN,
-        "wmsurl": "",
-        "maxZoom": 18,
-        "minZoom": 9,
+        "wmsurl": "",        
         "isVisible": false,
-        "isBaseLayer": true
+        "isBaseLayer": true,
+        "numZoomLevels": 16
     }],
     "overlay_map_layers": [{
         "id": "nexrad",

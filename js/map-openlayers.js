@@ -137,12 +137,17 @@ function addMapLayers(layersArray) {
 				layer = new OpenLayers.Layer.XYZ(value.name, value.wmsurl.replace(/\{/g, "${"));
 			}
 		} else if (value.id.indexOf("google") != -1) {
-			console.log("google layer");
 			layer = new OpenLayers.Layer.Google(value.name, {
 				type: value.type,
 				sphericalMercator: true,
-				wrapDateLine: false
-			})
+				wrapDateLine: false,
+				numZoomLevels: value.numZoomLevels
+			}, {
+				isBaseLayer: value.isBaseLayer,
+				opacity: value.opacity,
+				visibility: value.isVisible		
+			
+			});			
 
 		} else {
 			layer = new OpenLayers.Layer.WMS(

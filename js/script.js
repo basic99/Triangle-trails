@@ -202,6 +202,7 @@ function changeHash(objectid, tabid) {
     You can toggle a layer when an accordion activates via toggleLayer(layerID)
 */
 function processAccordionDataChange(accordionValue) {
+    console.log(accordionValue);
     $.publish("/change/hash", [null, accordionValue]);
     if (selectedAddress.objectid) { // Make sure an address is selected
         switch (accordionValue) {
