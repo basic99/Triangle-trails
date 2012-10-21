@@ -1,0 +1,9 @@
+.layersDiv {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.baseLbl,.dataLbl {
+    font-weight: 600;
+    padding: 5px;
+}

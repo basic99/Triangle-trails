@@ -51,7 +51,7 @@ var config = {
         "name": "Umstead Park Trails",
         //"attribution": "Provided by Mecklenburg County GIS",
         "wmsurl": "http://jimserver.net/geoserver/opengeo/wms",
-        "layers": "umstead_named_trails,umstead_line",
+        "layers": "umstead_named_trails,umstead_line,roads_and_footpaths",
         "format": "image/png",
         "transparent": true,
         "opacity": 0.5,

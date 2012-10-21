@@ -65,7 +65,8 @@ function initializeMap() { /*  initialze map  */
 	map.addControl(new OpenLayers.Control.MousePosition({
 		'div': OpenLayers.Util.getElement('toolbar-coords')
 	}));
-	map.addControl(new OpenLayers.Control.LayerSwitcher());
+	
+	map.addControl(new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layer_switch_ctl')}));
 	selectControl = new OpenLayers.Control.SelectFeature(markerLayer, {
 		onSelect: onFeatureSelect,
 		onUnselect: onFeatureUnselect,
