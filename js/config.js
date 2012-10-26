@@ -34,6 +34,34 @@ var config = {
         "numZoomLevels": 16
     }],
     "overlay_map_layers": [{
+        "id": "trails",
+        "name": "Trails",
+        //"attribution": "Provided by Mecklenburg County GIS",
+        "wmsurl": "http://jimserver.net/geoserver/opengeo/wms",
+        "layers": "umstead_named_trails,roads_and_footpaths",
+        "format": "image/png",
+        "transparent": true,
+        "opacity": 0.8,
+        "maxZoom": 18,
+        "minZoom": 15,
+        "isVisible": false,
+        "isBaseLayer": false
+    },
+    {
+        "id": "parks",
+        "name": "Parks and Managed Areas",
+        //"attribution": "Provided by Mecklenburg County GIS",
+        "wmsurl": "http://jimserver.net/geoserver/opengeo/wms",
+        "layers": "umstead_line",
+        "format": "image/png",
+        "transparent": true,
+        "opacity": 0.8,
+        "maxZoom": 18,
+        "minZoom": 15,
+        "isVisible": false,
+        "isBaseLayer": false
+    },
+    {
         "id": "nexrad",
         "name": "Nexrad Weather Radar",
         "attribution": "Provided by Iowa State University",
@@ -46,18 +74,5 @@ var config = {
         "minZoom": 9,
         "isVisible": false,
         "isBaseLayer": false
-    }, {
-        "id": "umstead_trails",
-        "name": "Umstead Park Trails",
-        //"attribution": "Provided by Mecklenburg County GIS",
-        "wmsurl": "http://jimserver.net/geoserver/opengeo/wms",
-        "layers": "umstead_named_trails,umstead_line,roads_and_footpaths",
-        "format": "image/png",
-        "transparent": true,
-        "opacity": 0.5,
-        "maxZoom": 18,
-        "minZoom": 15,
-        "isVisible": false,
-        "isBaseLayer": false
-    }]
+    } ]
 };

@@ -118,6 +118,10 @@ function initializeMap() { /*  initialze map  */
 		theLayer = getLayerOpenLayers($('#opacitydll').val());
 		if (theLayer) $("#opacitySlider").slider("option", "value", theLayer.opacity);
 	});
+	(function() {
+		theLayer = getLayerOpenLayers($('#opacitydll').val());
+		if (theLayer) $("#opacitySlider").slider("option", "value", theLayer.opacity);
+	})();
 	$('#opacitySlider').sliderLabels('MAP', 'DATA');
 }
 
