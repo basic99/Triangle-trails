@@ -36,8 +36,7 @@ var config = {
     "overlay_map_layers": [{
         "id": "trails",
         "name": "Named Trails",
-        //"attribution": "Provided by Mecklenburg County GIS",
-        "wmsurl": "http://jimserver.net/geoserver/opengeo/wms",
+        "wmsurl": "http://jimserver.net/geoserver/wms",
         "layers": "umstead_named_trails",
         "format": "image/png",
         "transparent": true,
@@ -48,10 +47,9 @@ var config = {
         "isBaseLayer": false
     },
     {
-        "id": "trails",
+        "id": "roads",
         "name": "Roads, Paths, etc.",
-        //"attribution": "Provided by Mecklenburg County GIS",
-        "wmsurl": "http://jimserver.net/geoserver/opengeo/wms",
+        "wmsurl": "http://jimserver.net/geoserver/wms",
         "layers": "roads_and_footpaths",
         "format": "image/png",
         "transparent": true,
@@ -64,15 +62,14 @@ var config = {
     {
         "id": "parks",
         "name": "Parks and Managed Areas",
-        //"attribution": "Provided by Mecklenburg County GIS",
-        "wmsurl": "http://jimserver.net/geoserver/opengeo/wms",
+        "wmsurl": "http://jimserver.net/geoserver/wms",
         "layers": "umstead_line",
         "format": "image/png",
         "transparent": true,
         "opacity": 0.8,
         "maxZoom": 18,
         "minZoom": 15,
-        "isVisible": false,
+        "isVisible": true,
         "isBaseLayer": false
     },
     {
@@ -88,5 +85,13 @@ var config = {
         "minZoom": 9,
         "isVisible": false,
         "isBaseLayer": false
-    } ]
+    } ],
+    "vector_map_layers": [
+        {
+        "id": "facilities",
+        "name": "facilities",
+        "wfsurl": "http://jimserver.net/geoserver/wfs",
+        "layers": "umstead_points"       
+    }
+    ]
 };

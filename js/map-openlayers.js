@@ -20,6 +20,7 @@ function initializeMap() { /*  initialze map  */
 	/*  Add map layers  */
 	addMapLayers(config.base_map_layers);
 	addMapLayers(config.overlay_map_layers);
+	addMapWFSLayers(config.vector_map_layers);
 
 	/*  Set map center and zoom  */
 	map.setCenter(new OpenLayers.LonLat(config.default_map_center[1], config.default_map_center[0]).transform(
@@ -54,7 +55,7 @@ function initializeMap() { /*  initialze map  */
 			backgroundYOffset: -40
 		}
 	};
-	styleMap.addUniqueValueRules("default", "type", lookup);
+	//styleMap.addUniqueValueRules("default", "type", lookup);
 	var markerLayer = new OpenLayers.Layer.Vector('Map Markers', {
 		styleMap: styleMap,
 		displayInLayerSwitcher: false
@@ -65,8 +66,10 @@ function initializeMap() { /*  initialze map  */
 	map.addControl(new OpenLayers.Control.MousePosition({
 		'div': OpenLayers.Util.getElement('toolbar-coords')
 	}));
-	
-	map.addControl(new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layer_switch_ctl')}));
+
+	map.addControl(new OpenLayers.Control.LayerSwitcher({
+		'div': OpenLayers.Util.getElement('layer_switch_ctl')
+	}));
 	selectControl = new OpenLayers.Control.SelectFeature(markerLayer, {
 		onSelect: onFeatureSelect,
 		onUnselect: onFeatureUnselect,
@@ -150,9 +153,9 @@ function addMapLayers(layersArray) {
 			}, {
 				isBaseLayer: value.isBaseLayer,
 				opacity: value.opacity,
-				visibility: value.isVisible		
-			
-			});			
+				visibility: value.isVisible
+
+			});
 
 		} else {
 			layer = new OpenLayers.Layer.WMS(
@@ -171,6 +174,30 @@ function addMapLayers(layersArray) {
 
 			});
 		}
+		map.addLayer(layer);
+	});
+}
+
+function addMapWFSLayers(layersArray) {
+	//var layers = {};
+	var styleMap = new OpenLayers.StyleMap({
+		fillOpacity: 1,
+		pointRadius: 2,
+		fillcolor: '#AA0000'
+	});
+	var layer;
+	$.each(layersArray, function(index, value) {
+		layer = new OpenLayers.Layer.Vector("WFS", {
+			projection: "EPSG:4326",
+			styleMap: styleMap,
+			displayInLayerSwitcher: false,
+			strategies: [new OpenLayers.Strategy.BBOX()],
+			protocol: new OpenLayers.Protocol.WFS({
+				url: value.wfsurl,
+				featureType: value.layers,
+				geometryName: "geog"
+			})
+		});
 		map.addLayer(layer);
 	});
 }
