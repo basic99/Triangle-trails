@@ -90,7 +90,7 @@ var config = {
         {
         "id": "facilities",
         "name": "facilities",
-        "wfsurl": "http://jimserver.net/geoserver/wfs",
+        "wfsurl": "http://localhost/geoserver/wfs",
         "layers": "umstead_points"       
     }
     ]

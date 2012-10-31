@@ -180,18 +180,41 @@ function addMapLayers(layersArray) {
 
 function addMapWFSLayers(layersArray) {
 	//var layers = {};
-	var styleMap = new OpenLayers.StyleMap({
+	
+	var mystyle = new OpenLayers.Style(
+								{
 		fillOpacity: 1,
 		pointRadius: 2,
-		fillcolor: '#AA0000'
+		fillcolor: '#AA0000',
+		'externalGraphic': "img/parksymbols/" + '${symbol}',
+		pointRadius: 12
+		
+	}, {
+		context: {
+			symbol: function(feature) {
+				//return 'img/ParkSymbol-20.png'
+				if(feature.cluster.length == 1){
+					return feature.cluster[0].attributes.symbol;
+					
+				} else {
+					return 'more.png'
+				}
+				
+			}
+		}
 	});
+	var styleMap = new OpenLayers.StyleMap({
+		default: mystyle
+		});
 	var layer;
 	$.each(layersArray, function(index, value) {
 		layer = new OpenLayers.Layer.Vector("WFS", {
 			projection: "EPSG:4326",
 			styleMap: styleMap,
+			
 			displayInLayerSwitcher: false,
-			strategies: [new OpenLayers.Strategy.BBOX()],
+			strategies: [new OpenLayers.Strategy.BBOX(),
+						  new OpenLayers.Strategy.Cluster({distance: 30})],
 			protocol: new OpenLayers.Protocol.WFS({
 				url: value.wfsurl,
 				featureType: value.layers,
