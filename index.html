@@ -7,16 +7,13 @@
     <!--[if lt IE 9]><html class="oldie" lang="en"><![endif]-->
 
     <title>Triangle Trails GeoPortal</title>
-    <meta name="description" content="GeoPortal Project - Open Source Mapping Template">
-    <meta name="author" content="Tobin Bradley, Jim White">
+    <meta name="description" content="Triangle Trails web map of Greenways in Research Triangle, NC, area.">
+    <meta name="author" content="Jim White">
 
-    <!-- Allow all robots -->
     <meta content="all" name="robots" />
 
-    <!-- turn off IE image toolbar -->
     <meta content="no" http-equiv="imagetoolbar" />
 
-    <!-- Mobile viewport optimized -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -28,19 +25,11 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144.png" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-    <!-- jQuery UI CSS -->
     <link type="text/css" media="all" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/blitzer/jquery-ui.css" rel="stylesheet" />
 
-    <!-- Leaflet CSS -->
-    <!-- Toss these next 2 lines if you are using OpenLayers 
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.css" />
-    <!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.ie.css" /><![endif]-->
-
-    <!-- CSS: implied media="all" -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/triangletrails.css">
 
-    <!-- Modernizr in the head. The rest of the JavaScript is at the bottom of the page. -->
     <script src="js/libs/modernizr.custom.js"></script>
 
 </head>
@@ -48,17 +37,13 @@
 <body>
 
     <div id="container">
-        <!-- Prompt IE<8 users to install Chrome Frame. -->
         <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to best experience this site.</p><![endif]-->
 
         <header>
-
-            <!-- Header logo -->
             <div id="logo" class="logo alignleft">
                 <img src="img/gp_trtrls_logo.png" />
             </div>
 
-            <!-- Search -->
             <div id="searchdiv" class="screen-only">
                 <input id="searchinput" class="ui-corner-all" x-webkit-speech speech placeholder="Start here!" />
                 <p class="mute">
@@ -72,10 +57,8 @@
         </header>
 
 
-        <!-- Map area -->
         <div id="map-container">
 
-            <!-- Toolbar area -->
             <div id="toolbar" class="screen-only hidden">
                 <div id="mapcontrols">
                     <input type="radio" id="navigate" name="mapcontrol-button" value="none" checked="checked" />
@@ -91,15 +74,12 @@
                 </div>
             </div>
 
-            <!-- Map -->
             <div id="map" class="ui-corner-all"></div>
         </div>
 
 
-        <!-- Sidebar -->
         <aside>
 
-            <!-- Data Accordion -->
             <div id="accordion-data" class="accordion hidden">
                 <h3 id="WELCOME"><a href="javascript:void(0)">Welcome</a></h3>
                 <div>
@@ -113,105 +93,14 @@
                         <span class="selectedLocation">No records selected.</span>
                     </div>
                 </div>
-                <!--
-                <h3 id="TRANSPORTATION"><a href="javascript:void(0)">Transportation</a></h3>
-                <div>
-                    <div>
-                        <h5>Search Results</h5>
-                        <span class="selectedLocation">No records selected.</span>
-                    </div>
-                    <div id="bus-stops" class="selected-data hidden">
-                        <table class="datatable">
-                            <caption>10 Nearest CATS Bus Stops</caption>
-                            <thead>
-                                <tr>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default">Bus Stop</th>
-                                    <th class="ui-state-default">Routes</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                       </table>
-                    </div>
-                    <div id="park-and-rides" class="selected-data hidden">
-                        <table class="datatable">
-                            <caption>3 Nearest CATS Park &amp; Ride</caption>
-                            <thead>
-                                <tr>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default">Bus Stop</th>
-                                    <th class="ui-state-default">Address</th>
-                                    <th class="ui-state-default">Routes</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <div id="light-rail-stops" class="selected-data hidden">
-                        <table class="datatable">
-                            <caption>3 Nearest CATS Lynx Stops</caption>
-                            <thead>
-                                <tr>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default">Bus Stop</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>-->
+               
                 <h3 id="FACILITIES"><a href="javascript:void(0)">Facilities</a></h3>
                 <div>
-                    <div>
-                        <h5>Search Results</h5>
-                        <span class="selectedLocation">No records selected.</span>
+                   
+                    <div id="parks" >
+                       
                     </div>
-                    <div id="parks" class="selected-data hidden">
-                        <table class="datatable">
-                            <caption>5 Closest Parks</caption>
-                            <thead>
-                                 <tr>
-                                      <th class="ui-state-default"></th>
-                                      <th class="ui-state-default"></th>
-                                      <th class="ui-state-default">Park</th>
-                                      <th class="ui-state-default">Address</th>
-                                 </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <div id="libraries" class="selected-data hidden">
-                        <table class="datatable">
-                            <caption>5 Closest Libraries</caption>
-                            <thead>
-                                <tr>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default">Library</th>
-                                    <th class="ui-state-default">Address</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                    <div id="fire-stations" class="selected-data hidden">
-                        <table class="datatable">
-                            <caption>3 Closest Fire Stations</caption>
-                            <thead>
-                                <tr>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default"></th>
-                                    <th class="ui-state-default">Fire Station</th>
-                                    <th class="ui-state-default">Type</th>
-                                    <th class="ui-state-default">Address</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+                   
                 </div>
                 <h3 id="MAPCONTROLS"><a href="javascript:void(0)">Map Controls</a></h3>
                 <div class="textcenter">
@@ -224,40 +113,25 @@
 
             <div id="sidebar-footer" class="textcenter mute">
                 <hr />
-                Created by <a href="http://emaps.charmeck.org">Mecklenburg County GIS</a>
-                <br />
-                Fork me on <a href="https://github.com/tobinbradley">Github</a>
+                
+                Created by <a href="http://whitecodingandmaps.com/">White Coding and Maps</a>
+           
             </div>
 
         </aside>
 
 
 
-    </div> <!-- end of #container -->
-
-
-    <!-- JavaScript at the bottom for fast page loading -->
-
-    <!-- Grab Google CDN's jQuery and jQuery UI -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 
-    <!-- Mapping Library - Leaflet 
-    <script src="http://cdn.leafletjs.com/leaflet-0.4.4/leaflet.js"></script>-->
-
-    <!-- Mapping Library - OpenLayers -->
-    <!-- For deployment you should really host the OpenLayers Library locally so an OpenLayers upgrade -->
-    <!-- doesn't break your stuff. -->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="http://openlayers.org/api/OpenLayers.js"></script>
     <script src="js/map-openlayers.js"></script><!---->
 
-    <!-- Standard scripts -->
     <script src="js/config.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/script.js"></script>
-
-    <!-- end scripts-->
 
 
     <!-- The following content is not displayed at run time -->

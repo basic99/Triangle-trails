@@ -11,3 +11,7 @@
 #mapcontrols.ui-buttonset {
     visibility: hidden;
 }
+
+#parks {
+    padding-left: 25px;
+}
