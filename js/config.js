@@ -94,10 +94,11 @@ var config = {
 		"isVisible": false,
 		"isBaseLayer": false
 	}],
-	"vector_map_layers": [{
+        //currently only supports one vector layer
+	"vector_map_layer": {
 		"id": "facilities",
 		"name": "Facilities",
-		"wfsurl": "http://jimserver.net/geoserver/wfs",
+		"wfsurl": "http://localhost/geoserver/wfs",
 		"layers": "umstead_points",
 		"switchColumn": "",
 		"switchVals": [{
@@ -117,7 +118,7 @@ var config = {
 			"val": "prklots"
 		}, {
 			"title": "Parking Lot Equestrian",
-			"val": "prklotseq"
+			"val": "eqparkinglots"
 		}, {
 			"title": "Bridges",
 			"val": "brdg"
@@ -128,7 +129,7 @@ var config = {
 			"title": "Visitor Facilities",
 			"val": "visitor"
 		}]
-	}]
+	}
 };
 
 

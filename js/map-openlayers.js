@@ -18,9 +18,87 @@ function initializeMap() { /*  initialze map  */
 	});
 
 	/*  Add map layers  */
+
 	addMapLayers(config.base_map_layers);
 	addMapLayers(config.overlay_map_layers);
-	addMapWFSLayers(config.vector_map_layers);
+
+	/* Add facilities and switcher layer
+	  
+	JBW 11/6/2012
+	
+	*/
+	var mystyle = new OpenLayers.Style({
+		fillOpacity: 1,
+		pointRadius: 2,
+		fillcolor: '#AA0000',
+		'externalGraphic': "img/parksymbols/" + '${symbol}',
+		pointRadius: 12
+	}, {
+		context: {
+			symbol: function(feature) {
+				if (feature.cluster.length == 1) {
+					return feature.cluster[0].attributes.symbol;
+				} else {
+					return 'more.png'
+				}
+
+			}
+		}
+	});
+	var styleMap = new OpenLayers.StyleMap({
+		default: mystyle
+	});
+	var vector_layer = new OpenLayers.Layer.Vector("WFS", {
+		projection: "EPSG:4326",
+		styleMap: styleMap,
+		displayInLayerSwitcher: false,
+		strategies: [new OpenLayers.Strategy.BBOX(), new OpenLayers.Strategy.Cluster({
+			distance: 30
+		})],
+		protocol: new OpenLayers.Protocol.WFS({
+			url: config.vector_map_layer.wfsurl,
+			featureType: config.vector_map_layer.layers,
+			geometryName: "geog"
+		})
+	});
+	map.addLayer(vector_layer);
+
+	var html_str = '';
+	$.each(config.vector_map_layer.switchVals, function(index, value) {
+		html_str += "<input type='checkbox' id='" + value.val + "' /><label for='" + value.val + "'>" + value.title + "</label><br>";
+	});
+	$("#parks").html(html_str);
+
+	$("#parks input").change(function() {
+		var selected = $("#parks input:checked");
+		var selected_str = "";
+		$.each(selected, function(index, value) {
+			selected_str += " " + value.id;
+		});
+		console.log(selected_str);
+		if (selected_str.indexOf('allfac') != -1) {
+			vector_layer.setVisibility(true);
+		} else {
+			for (i = 0; i < vector_layer.features.length; i++) {
+				clust = vector_layer.features[i].cluster;
+				for (j = 0; j < clust.length; j++) {
+					if (clust[j].data.switch_val != 'admin') {
+						clust[j].destroy();
+					}
+				}
+				vector_layer.drawFeature(vector_layer.features[i]);
+			}
+		}
+		
+	});
+	
+	vector_layer.events.on({
+		'featuremodified': function(evt) {
+			console.log(evt);
+			}		
+
+		});
+
 
 	/*  Set map center and zoom  */
 	map.setCenter(new OpenLayers.LonLat(config.default_map_center[1], config.default_map_center[0]).transform(
@@ -126,9 +204,9 @@ function initializeMap() { /*  initialze map  */
 		if (theLayer) $("#opacitySlider").slider("option", "value", theLayer.opacity);
 	})();
 	$('#opacitySlider').sliderLabels('MAP', 'DATA');
-}
 
 
+} //end initialize map
 /*
     Adds layers to the map on initial map load.
     Input array comes from the config.json file.
@@ -178,53 +256,9 @@ function addMapLayers(layersArray) {
 	});
 }
 
-function addMapWFSLayers(layersArray) {
-	var mystyle = new OpenLayers.Style({
-		fillOpacity: 1,
-		pointRadius: 2,
-		fillcolor: '#AA0000',
-		'externalGraphic': "img/parksymbols/" + '${symbol}',
-		pointRadius: 12
 
-	}, {
-		context: {
-			symbol: function(feature) {
-				if (feature.cluster.length == 1) {
-					return feature.cluster[0].attributes.symbol;
-				} else {
-					return 'more.png'
-				}
 
-			}
-		}
-	});
-	var styleMap = new OpenLayers.StyleMap({
-		default: mystyle
-	});
-	var layer;
-	$.each(layersArray, function(index, value) {
-		layer = new OpenLayers.Layer.Vector("WFS", {
-			projection: "EPSG:4326",
-			styleMap: styleMap,
-			displayInLayerSwitcher: false,
-			strategies: [new OpenLayers.Strategy.BBOX(), new OpenLayers.Strategy.Cluster({
-				distance: 30
-			})],
-			protocol: new OpenLayers.Protocol.WFS({
-				url: value.wfsurl,
-				featureType: value.layers,
-				geometryName: "geog"
-			})
-		});
-		map.addLayer(layer);
-		$("#parks caption").html(value.name);
-		var html_str = '';
-		$.each(value.switchVals, function(index, value) {
-			html_str += "<input type='checkbox' id='" + value.val +  "' /><label for='" + value.val + "'>" + value.title + "</label><br>";
-			});
-		$("#parks").html(html_str);
-	});
-}
+
 
 
 /*  Handle toolbar events  */
