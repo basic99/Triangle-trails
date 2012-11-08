@@ -98,9 +98,9 @@ var config = {
 	"vector_map_layer": {
 		"id": "facilities",
 		"name": "Facilities",
-		"wfsurl": "http://localhost/geoserver/wfs",
+		"wfsurl": "http://jimserver.net/geoserver/wfs",
 		"layers": "umstead_points",
-		"switchColumn": "",
+		"switchColumn": "switch_val",
 		"switchVals": [{
 			"title": "All Facilities",
 			"val": "allfac"

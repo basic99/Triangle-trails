@@ -23,9 +23,9 @@ function initializeMap() { /*  initialze map  */
 	addMapLayers(config.overlay_map_layers);
 
 	/* Add facilities and switcher layer
-	  
+	 //////////////////////////////////////////////////// 
 	JBW 11/6/2012
-	
+	//////////////////////////////////////////////////////
 	*/
 	var mystyle = new OpenLayers.Style({
 		fillOpacity: 1,
@@ -39,21 +39,23 @@ function initializeMap() { /*  initialze map  */
 				if (feature.cluster.length == 1) {
 					return feature.cluster[0].attributes.symbol;
 				} else {
-					return 'more.png'
+					return 'more.png';
 				}
 
 			}
 		}
 	});
-	var styleMap = new OpenLayers.StyleMap({
+	var mystyleMap = new OpenLayers.StyleMap({
 		default: mystyle
 	});
-	var vector_layer = new OpenLayers.Layer.Vector("WFS", {
+
+	vector_layer = new OpenLayers.Layer.Vector("WFS", {
 		projection: "EPSG:4326",
-		styleMap: styleMap,
+		styleMap: mystyleMap,
 		displayInLayerSwitcher: false,
-		strategies: [new OpenLayers.Strategy.BBOX(), new OpenLayers.Strategy.Cluster({
-			distance: 30
+		visibility: false,
+		strategies: [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster({
+			distance: 20
 		})],
 		protocol: new OpenLayers.Protocol.WFS({
 			url: config.vector_map_layer.wfsurl,
@@ -63,41 +65,46 @@ function initializeMap() { /*  initialze map  */
 	});
 	map.addLayer(vector_layer);
 
-	var html_str = '';
+	var html_str = "<input type='radio' checked=checked name='facilities' id='off' /><label for='off'>Off</label><br>";
 	$.each(config.vector_map_layer.switchVals, function(index, value) {
-		html_str += "<input type='checkbox' id='" + value.val + "' /><label for='" + value.val + "'>" + value.title + "</label><br>";
+		html_str += "<input type='radio' name='facilities' id='" + value.val + "' /><label for='" + value.val + "'>" + value.title + "</label><br>";
 	});
 	$("#parks").html(html_str);
 
-	$("#parks input").change(function() {
-		var selected = $("#parks input:checked");
-		var selected_str = "";
-		$.each(selected, function(index, value) {
-			selected_str += " " + value.id;
-		});
-		console.log(selected_str);
-		if (selected_str.indexOf('allfac') != -1) {
-			vector_layer.setVisibility(true);
-		} else {
-			for (i = 0; i < vector_layer.features.length; i++) {
-				clust = vector_layer.features[i].cluster;
-				for (j = 0; j < clust.length; j++) {
-					if (clust[j].data.switch_val != 'admin') {
-						clust[j].destroy();
-					}
-				}
-				vector_layer.drawFeature(vector_layer.features[i]);
-			}
-		}
-		
-	});
-	
-	vector_layer.events.on({
-		'featuremodified': function(evt) {
-			console.log(evt);
-			}		
 
-		});
+
+	$("#parks input").click(function() {
+		var selected = $("#parks input:checked").attr("id");
+		vector_layer.filter = null;
+		if (selected.indexOf('allfac') !== -1) {
+			vector_layer.filter = null;
+			vector_layer.refresh({
+				force: true
+			});
+			vector_layer.setVisibility(true);
+		} else if (selected.indexOf('off') !== -1) {
+			vector_layer.filter = null;
+			vector_layer.refresh({
+				force: true
+			});
+			vector_layer.setVisibility(false);
+		} else {
+			vector_layer.filter = new OpenLayers.Filter.Comparison({
+				type: OpenLayers.Filter.Comparison.EQUAL_TO,
+				property: config.vector_map_layer.switchColumn,
+				value: selected
+			});
+			vector_layer.refresh({
+				force: true
+			});
+			vector_layer.setVisibility(true);
+
+		}
+
+
+	});
+
+
 
 
 	/*  Set map center and zoom  */
@@ -155,6 +162,10 @@ function initializeMap() { /*  initialze map  */
 	});
 	map.addControl(selectControl);
 	selectControl.activate();
+	
+	map.addControl(new OpenLayers.Control.ScaleLine());
+	map.addControl(new OpenLayers.Control.OverviewMap());
+	
 
 	/*  Locate user position via GeoLocation API  */
 	if (Modernizr.geolocation) {
