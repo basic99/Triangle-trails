@@ -72,21 +72,27 @@ function initializeMap() { /*  initialze map  */
 	$("#parks").html(html_str);
 
 
-
+	//var vector_layer_refreshed;
+	var vector_layer_loaded = false;
+	var check_refresh_interval = 400;
 	$("#parks input").click(function() {
 		var selected = $("#parks input:checked").attr("id");
 		vector_layer.filter = null;
 		if (selected.indexOf('allfac') !== -1) {
 			vector_layer.filter = null;
+			vector_layer_loaded = false;
 			vector_layer.refresh({
 				force: true
 			});
+			setTimeout(check_refresh, check_refresh_interval);
 			vector_layer.setVisibility(true);
 		} else if (selected.indexOf('off') !== -1) {
 			vector_layer.filter = null;
+			vector_layer_loaded = false;
 			vector_layer.refresh({
 				force: true
 			});
+			setTimeout(check_refresh, check_refresh_interval);
 			vector_layer.setVisibility(false);
 		} else {
 			vector_layer.filter = new OpenLayers.Filter.Comparison({
@@ -94,15 +100,33 @@ function initializeMap() { /*  initialze map  */
 				property: config.vector_map_layer.switchColumn,
 				value: selected
 			});
+			vector_layer_loaded = false;
 			vector_layer.refresh({
 				force: true
 			});
+			setTimeout(check_refresh, check_refresh_interval);
 			vector_layer.setVisibility(true);
 
 		}
-
-
 	});
+	vector_layer.events.on({
+		//refresh not being used , TD remove
+		'refresh': function(evt) {
+			vector_layer_refreshed = true;
+		},
+		'loadstart': function(evt) {
+			vector_layer_loaded = true;			
+		}
+	});
+	function check_refresh() {
+		if (vector_layer_loaded == false) {
+			vector_layer.refresh({
+				force: true
+			});
+			console.log("load not sent, try again!")
+		}
+	}
+
 
 
 
@@ -162,10 +186,10 @@ function initializeMap() { /*  initialze map  */
 	});
 	map.addControl(selectControl);
 	selectControl.activate();
-	
+
 	map.addControl(new OpenLayers.Control.ScaleLine());
 	map.addControl(new OpenLayers.Control.OverviewMap());
-	
+
 
 	/*  Locate user position via GeoLocation API  */
 	if (Modernizr.geolocation) {
