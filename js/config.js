@@ -99,7 +99,7 @@ var config = {
 		"id": "facilities",
 		"name": "Facilities",
 		"wfsurl": "http://jimserver.net/geoserver/wfs",
-		"layers": "umstead_points",
+		"layers": "facilities",
 		"switchColumn": "switch_val",
 		"switchVals": [{
 			"title": "All Facilities",
@@ -116,13 +116,7 @@ var config = {
 		}, {
 			"title": "Parking Lots",
 			"val": "prklots"
-		}, {
-			"title": "Parking Lot Equestrian",
-			"val": "eqparkinglots"
-		}, {
-			"title": "Bridges",
-			"val": "brdg"
-		}, {
+		},  {
 			"title": "Park Administration and Maintenance",
 			"val": "admin"
 		}, {

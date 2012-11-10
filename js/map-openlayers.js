@@ -31,15 +31,15 @@ function initializeMap() { /*  initialze map  */
 		fillOpacity: 1,
 		pointRadius: 2,
 		fillcolor: '#AA0000',
-		'externalGraphic': "img/parksymbols/" + '${symbol}',
+		'externalGraphic': "img/parksymbols/" + '${symbol}' + ".png",
 		pointRadius: 12
 	}, {
 		context: {
 			symbol: function(feature) {
 				if (feature.cluster.length == 1) {
-					return feature.cluster[0].attributes.symbol;
+					return $.trim(feature.cluster[0].attributes.symbol);
 				} else {
-					return 'more.png';
+					return 'more';
 				}
 
 			}
@@ -55,7 +55,7 @@ function initializeMap() { /*  initialze map  */
 		displayInLayerSwitcher: false,
 		visibility: false,
 		strategies: [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster({
-			distance: 20
+			distance: 25
 		})],
 		protocol: new OpenLayers.Protocol.WFS({
 			url: config.vector_map_layer.wfsurl,
