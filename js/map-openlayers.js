@@ -54,9 +54,9 @@ function initializeMap() { /*  initialze map  */
 		styleMap: mystyleMap,
 		displayInLayerSwitcher: false,
 		visibility: false,
-		strategies: [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster({
-			distance: 25
-		})],
+		strategies: [new OpenLayers.Strategy.Fixed(),
+					 new OpenLayers.Strategy.Cluster({	distance: 30}
+		)],
 		protocol: new OpenLayers.Protocol.WFS({
 			url: config.vector_map_layer.wfsurl,
 			featureType: config.vector_map_layer.layers,

@@ -11,7 +11,7 @@ var config = {
 		"name": "Open Street Map",
 		"attribution": "Provided by Tiles@Home",
 		"wmsurl": "http://tile.openstreetmap.org/{z}/{x}/{y}.png",
-		"maxZoom": 18,
+		"maxZoom": 20,
 		"minZoom": 9,
 		"isVisible": false,
 		"isBaseLayer": true
@@ -22,7 +22,7 @@ var config = {
 		"wmsurl": "",
 		"isVisible": false,
 		"isBaseLayer": true,
-		"numZoomLevels": 19
+		"numZoomLevels": 20
 	}, {
 		"id": "google_ter",
 		"name": "Google Terrain",
@@ -38,7 +38,7 @@ var config = {
 		"layers": "",
 		"format": "image/png",
 		"transparent": false,
-		"maxZoom": 18,
+		"maxZoom": 20,
 		"minZoom": 9,
 		"isVisible": false,
 		"isBaseLayer": true,
@@ -52,23 +52,47 @@ var config = {
 		"format": "image/png",
 		"transparent": true,
 		"opacity": 0.8,
-		"maxZoom": 18,
-		"minZoom": 15,
+		"maxZoom": 20,
+		"minZoom": 10,
 		"isVisible": false,
 		"isBaseLayer": false
 	}, {
-		"id": "roads",
-		"name": "Roads, Paths, etc.",
+		"id": "footpaths",
+		"name": "Footpaths",
 		"wmsurl": "http://jimserver.net/geoserver/wms",
-		"layers": "roads_and_footpaths",
+		"layers": "footpaths",
 		"format": "image/png",
 		"transparent": true,
 		"opacity": 0.8,
-		"maxZoom": 18,
-		"minZoom": 15,
+		"maxZoom": 20,
+		"minZoom": 10,
 		"isVisible": false,
 		"isBaseLayer": false
 	}, {
+		"id": "unpaved_roads",
+		"name": "Unpaved Roads",
+		"wmsurl": "http://jimserver.net/geoserver/wms",
+		"layers": "unpaved_roads",
+		"format": "image/png",
+		"transparent": true,
+		"opacity": 0.8,
+		"maxZoom": 20,
+		"minZoom": 10,
+		"isVisible": false,
+		"isBaseLayer": false
+	},{
+		"id": "paved_roads",
+		"name": "Paved Roads, Powelines",
+		"wmsurl": "http://jimserver.net/geoserver/wms",
+		"layers": "paved_roads,powerline",
+		"format": "image/png",
+		"transparent": true,
+		"opacity": 0.8,
+		"maxZoom": 20,
+		"minZoom": 10,
+		"isVisible": false,
+		"isBaseLayer": false
+	},{
 		"id": "parks",
 		"name": "Parks and Managed Areas",
 		"wmsurl": "http://jimserver.net/geoserver/wms",
@@ -76,8 +100,8 @@ var config = {
 		"format": "image/png",
 		"transparent": true,
 		"opacity": 0.8,
-		"maxZoom": 18,
-		"minZoom": 15,
+		"maxZoom": 20,
+		"minZoom": 10,
 		"isVisible": true,
 		"isBaseLayer": false
 	}, {
@@ -89,7 +113,7 @@ var config = {
 		"format": "image/png",
 		"transparent": true,
 		"opacity": 0.5,
-		"maxZoom": 18,
+		"maxZoom": 20,
 		"minZoom": 9,
 		"isVisible": false,
 		"isBaseLayer": false
