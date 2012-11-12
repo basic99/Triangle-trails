@@ -82,7 +82,7 @@ var config = {
 		"isBaseLayer": false
 	},{
 		"id": "paved_roads",
-		"name": "Paved Roads, Powelines",
+		"name": "Paved Roads, Powerlines",
 		"wmsurl": "http://jimserver.net/geoserver/wms",
 		"layers": "paved_roads,powerline",
 		"format": "image/png",

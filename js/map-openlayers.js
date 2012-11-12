@@ -28,11 +28,9 @@ function initializeMap() { /*  initialze map  */
 	//////////////////////////////////////////////////////
 	*/
 	var mystyle = new OpenLayers.Style({
-		fillOpacity: 1,
-		pointRadius: 2,
-		fillcolor: '#AA0000',
-		'externalGraphic': "img/parksymbols/" + '${symbol}' + ".png",
-		pointRadius: 12
+		externalGraphic: "img/parksymbols/" + '${symbol}' + ".png",
+		graphicWidth: 25,
+		graphicHeight: 25
 	}, {
 		context: {
 			symbol: function(feature) {
@@ -54,9 +52,9 @@ function initializeMap() { /*  initialze map  */
 		styleMap: mystyleMap,
 		displayInLayerSwitcher: false,
 		visibility: false,
-		strategies: [new OpenLayers.Strategy.Fixed(),
-					 new OpenLayers.Strategy.Cluster({	distance: 30}
-		)],
+		strategies: [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster({
+			distance: 30
+		})],
 		protocol: new OpenLayers.Protocol.WFS({
 			url: config.vector_map_layer.wfsurl,
 			featureType: config.vector_map_layer.layers,
@@ -115,9 +113,10 @@ function initializeMap() { /*  initialze map  */
 			vector_layer_refreshed = true;
 		},
 		'loadstart': function(evt) {
-			vector_layer_loaded = true;			
+			vector_layer_loaded = true;
 		}
 	});
+
 	function check_refresh() {
 		if (vector_layer_loaded == false) {
 			vector_layer.refresh({
@@ -164,7 +163,7 @@ function initializeMap() { /*  initialze map  */
 			backgroundYOffset: -40
 		}
 	};
-	//styleMap.addUniqueValueRules("default", "type", lookup);
+	styleMap.addUniqueValueRules("default", "type", lookup);
 	var markerLayer = new OpenLayers.Layer.Vector('Map Markers', {
 		styleMap: styleMap,
 		displayInLayerSwitcher: false
