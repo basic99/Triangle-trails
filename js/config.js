@@ -122,7 +122,7 @@ var config = {
 	"vector_map_layer": {
 		"id": "facilities",
 		"name": "Facilities",
-		"wfsurl": "http://localhost/geoserver/wfs",
+		"wfsurl": "http://jimserver.net/geoserver/wfs",
 		"layers": "facilities",
 		"switchColumn": "switch_val",
 		"switchVals": [{
