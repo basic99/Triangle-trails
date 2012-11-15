@@ -52,7 +52,7 @@ function initializeMap() { /*  initialze map  */
 		styleMap: mystyleMap,
 		displayInLayerSwitcher: false,
 		visibility: false,
-		strategies: [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster({
+		strategies: [new OpenLayers.Strategy.BBOX(), new OpenLayers.Strategy.Cluster({
 			distance: 30
 		})],
 		protocol: new OpenLayers.Protocol.WFS({
@@ -61,9 +61,9 @@ function initializeMap() { /*  initialze map  */
 			geometryName: "geog"
 		})
 	});
-	
+
 	map.addLayer(vector_layer);
-	
+
 
 	var html_str = "<input type='radio' checked=checked name='facilities' id='off' /><label for='off'>Off</label><br>";
 	$.each(config.vector_map_layer.switchVals, function(index, value) {
@@ -71,38 +71,40 @@ function initializeMap() { /*  initialze map  */
 	});
 	$("#parks").html(html_str);
 
-	
+
 	$("#parks input").click(function() {
 		var selected = $("#parks input:checked").attr("id");
 		vector_layer.filter = null;
-		if (selected.indexOf('allfac') !== -1) {			
+		if (selected.indexOf('allfac') !== -1) {
 			vector_layer.filter = null;
+			vector_layer.setVisibility(true);
 			vector_layer.refresh({
 				force: true
 			});
-			vector_layer.setVisibility(true);			
+
 		} else if (selected.indexOf('off') !== -1) {
-			vector_layer.removeAllFeatures();		
-		} else {			
+			vector_layer.destroyFeatures();
+		} else {
 			vector_layer.filter = new OpenLayers.Filter.Comparison({
 				type: OpenLayers.Filter.Comparison.EQUAL_TO,
 				property: config.vector_map_layer.switchColumn,
 				value: selected
-			});			
+			});		
+			vector_layer.setVisibility(true);
 			vector_layer.refresh({
 				force: true
 			});
-			vector_layer.setVisibility(true);
 		}
 	});
-	/*
-	vector_layer.events.on({
-		//refresh not being used , TD remove
-		'refresh': function(evt) {
-			vector_layer_refreshed = true;
-		},
-		'loadstart': function(evt) {
-			vector_layer_loaded = true;
+	
+	//hack for destroy feautures and zoom bug
+	vector_layer.events.on({		
+		'featuresadded': function(evt) {
+			//console.log("features added");
+			var selected = $("#parks input:checked").attr("id");
+			if (selected.indexOf('off') !== -1) {
+				vector_layer.destroyFeatures();
+			}
 		}
 	});
 
@@ -114,7 +116,7 @@ function initializeMap() { /*  initialze map  */
 			console.log("load not sent, try again!")
 		}
 	}
-	*/
+
 
 	/*  Set map center and zoom  */
 	map.setCenter(new OpenLayers.LonLat(config.default_map_center[1], config.default_map_center[0]).transform(
