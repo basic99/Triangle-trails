@@ -52,7 +52,7 @@ function initializeMap() { /*  initialze map  */
 		styleMap: mystyleMap,
 		displayInLayerSwitcher: false,
 		visibility: false,
-		strategies: [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster({
+		strategies: [new OpenLayers.Strategy.BBOX(), new OpenLayers.Strategy.Cluster({
 			distance: 30
 		})],
 		protocol: new OpenLayers.Protocol.WFS({
