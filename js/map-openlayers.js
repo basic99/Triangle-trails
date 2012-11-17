@@ -7,6 +7,7 @@
 
 /*  Globals specifically for OpenLayers Use  */
 var selectControl; // OpenLayers select control for vector marker layer
+var vector_layer;
 /*  Map Initialization  */
 
 function initializeMap() { /*  initialze map  */
@@ -107,15 +108,6 @@ function initializeMap() { /*  initialze map  */
 			}
 		}
 	});
-
-	function check_refresh() {
-		if (vector_layer_loaded == false) {
-			vector_layer.refresh({
-				force: true
-			});
-			console.log("load not sent, try again!")
-		}
-	}
 
 
 	/*  Set map center and zoom  */

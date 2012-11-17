@@ -9,7 +9,7 @@ var map = null; // map
 var selectedAddress = {}; // JSON selected record object
 var markers = []; // Array of markers
 var layersControl; // Leaflet layer control
-var vector_layer;
+
 
 /*  Document Ready  */
 $(document).ready(function() {
