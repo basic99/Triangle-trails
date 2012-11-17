@@ -8,6 +8,7 @@
 /*  Globals specifically for OpenLayers Use  */
 var selectControl; // OpenLayers select control for vector marker layer
 var vector_layer;
+
 /*  Map Initialization  */
 
 function initializeMap() { /*  initialze map  */
@@ -44,8 +45,27 @@ function initializeMap() { /*  initialze map  */
 			}
 		}
 	});
+	var myselectstyle = new OpenLayers.Style({
+		externalGraphic: "img/parksymbols/" + '${symbol}' + ".png",
+		graphicWidth: 25,
+		graphicHeight: 25,
+		backgroundGraphic: "img/selected_bkgrnd.png"
+	}, {
+		context: {
+			symbol: function(feature) {
+				if (feature.cluster.length == 1) {
+					return $.trim(feature.cluster[0].attributes.symbol);
+				} else {
+					return 'more';
+				}
+
+			}
+		}
+	});
+
 	var mystyleMap = new OpenLayers.StyleMap({
-		default: mystyle
+		default: mystyle,
+		select: myselectstyle
 	});
 
 	vector_layer = new OpenLayers.Layer.Vector("WFS", {
@@ -90,16 +110,16 @@ function initializeMap() { /*  initialze map  */
 				type: OpenLayers.Filter.Comparison.EQUAL_TO,
 				property: config.vector_map_layer.switchColumn,
 				value: selected
-			});		
+			});
 			vector_layer.setVisibility(true);
 			vector_layer.refresh({
 				force: true
 			});
 		}
 	});
-	
+
 	//hack for destroy feautures and zoom bug
-	vector_layer.events.on({		
+	vector_layer.events.on({
 		'featuresadded': function(evt) {
 			//console.log("features added");
 			var selected = $("#parks input:checked").attr("id");
@@ -158,7 +178,7 @@ function initializeMap() { /*  initialze map  */
 	map.addControl(new OpenLayers.Control.LayerSwitcher({
 		'div': OpenLayers.Util.getElement('layer_switch_ctl')
 	}));
-	selectControl = new OpenLayers.Control.SelectFeature(markerLayer, {
+	selectControl = new OpenLayers.Control.SelectFeature(vector_layer, {
 		onSelect: onFeatureSelect,
 		onUnselect: onFeatureUnselect,
 		stopSingle: true
@@ -346,6 +366,10 @@ function zoomToLonLat(data) {
 /* Marker Vector Layer Popups */
 
 function onPopupClose(evt) {
+	//add this to close after zoomchange JBW
+	while (map.popups.length) {
+		map.removePopup(map.popups[0]);
+	}
 	selectControl.unselectAll();
 	OpenLayers.Event.stop(evt); // prevent an identify from firing
 }
@@ -356,11 +380,16 @@ function onFeatureSelect(feature) {
 	while (map.popups.length) {
 		map.removePopup(map.popups[0]);
 	}
-	popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), null, feature.attributes.label, null, true, onPopupClose);
-	feature.popup = popup;
-	popup.minSize = new OpenLayers.Size(200, 50);
-	popup.maxSize = new OpenLayers.Size(250, 200);
-	map.addPopup(popup);
+	var html_str = "<b>Feature Name</b>: " + feature.cluster[0].data.fac_name + "<br>";
+	html_str += "<b>Feature Type</b>: " + feature.cluster[0].data.fac_type;
+	if (feature.cluster.length == 1) {
+		popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), null, html_str, null, true, onPopupClose);
+		feature.popup = popup;
+		popup.minSize = new OpenLayers.Size(200, 50);
+		popup.maxSize = new OpenLayers.Size(250, 200);
+		map.addPopup(popup);
+	}
+
 }
 
 function onFeatureUnselect(feature) {
