@@ -1,3 +1,4 @@
+/*global OpenLayers:false map:false config:false */
 /*
     This file handles map initialization and events.
     @author  Tobin Bradley
@@ -36,7 +37,7 @@ function initializeMap() { /*  initialze map  */
 	}, {
 		context: {
 			symbol: function(feature) {
-				if (feature.cluster.length == 1) {
+				if (feature.cluster.length === 1) {
 					return $.trim(feature.cluster[0].attributes.symbol);
 				} else {
 					return 'more';
@@ -53,7 +54,7 @@ function initializeMap() { /*  initialze map  */
 	}, {
 		context: {
 			symbol: function(feature) {
-				if (feature.cluster.length == 1) {
+				if (feature.cluster.length === 1) {
 					return $.trim(feature.cluster[0].attributes.symbol);
 				} else {
 					return 'more';
@@ -250,13 +251,13 @@ function addMapLayers(layersArray) {
 	var layers = {};
 	$.each(layersArray, function(index, value) {
 		var layer;
-		if (value.wmsurl.indexOf("{x}") != -1) {
-			if (value.id == "osm") {
+		if (value.wmsurl.indexOf("{x}") !== -1) {
+			if (value.id === "osm") {
 				layer = new OpenLayers.Layer.OSM("OpenStreetMap");
 			} else {
 				layer = new OpenLayers.Layer.XYZ(value.name, value.wmsurl.replace(/\{/g, "${"));
 			}
-		} else if (value.id.indexOf("google") != -1) {
+		} else if (value.id.indexOf("google") !== -1) {
 			layer = new OpenLayers.Layer.Google(value.name, {
 				type: value.type,
 				sphericalMercator: true,
@@ -382,7 +383,7 @@ function onFeatureSelect(feature) {
 	}
 	var html_str = "<b>Feature Name</b>: " + feature.cluster[0].data.fac_name + "<br>";
 	html_str += "<b>Feature Type</b>: " + feature.cluster[0].data.fac_type;
-	if (feature.cluster.length == 1) {
+	if (feature.cluster.length === 1) {
 		popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), null, html_str, null, true, onPopupClose);
 		feature.popup = popup;
 		popup.minSize = new OpenLayers.Size(200, 50);
