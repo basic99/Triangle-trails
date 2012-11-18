@@ -65,7 +65,7 @@ function initializeMap() { /*  initialze map  */
 	});
 
 	var mystyleMap = new OpenLayers.StyleMap({
-		default: mystyle,
+		'default': mystyle,
 		select: myselectstyle
 	});
 
