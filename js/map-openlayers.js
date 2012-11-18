@@ -1,4 +1,4 @@
-/*global OpenLayers:false map:false config:false */
+/*global OpenLayers:false map:false config:false Modernizr:false*/
 /*
     This file handles map initialization and events.
     @author  Tobin Bradley, Jim White
@@ -8,11 +8,13 @@
 
 /*  Globals specifically for OpenLayers Use  */
 var selectControl; // OpenLayers select control for vector marker layer
-var vector_layer;
-
+var vector_layer; //put here so can access in javascript console
+var theLayer, url, message, point, zoom, popup, selectedFeature, args; //various undefined in GeoPortal
+var feats, i, feature; //various undefined in GeoPortal
 /*  Map Initialization  */
 
 function initializeMap() { /*  initialze map  */
+
 	map = new OpenLayers.Map({
 		div: "map",
 		projection: "EPSG:900913",
@@ -26,7 +28,7 @@ function initializeMap() { /*  initialze map  */
 	addMapLayers(config.overlay_map_layers);
 
 	/* Add facilities and switcher layer
-	 //////////////////////////////////////////////////// 
+	//////////////////////////////////////////////////// 
 	JBW 11/6/2012
 	//////////////////////////////////////////////////////
 	*/
@@ -227,16 +229,22 @@ function initializeMap() { /*  initialze map  */
 		value: 0.50,
 		stop: function(event, ui) {
 			theLayer = getLayerOpenLayers($('#opacitydll').val());
-			if (theLayer) theLayer.setOpacity(ui.value);
+			if (theLayer) {
+				theLayer.setOpacity(ui.value);
+			}
 		}
 	});
 	$('#opacitydll').change(function() {
 		theLayer = getLayerOpenLayers($('#opacitydll').val());
-		if (theLayer) $("#opacitySlider").slider("option", "value", theLayer.opacity);
+		if (theLayer) {
+			$("#opacitySlider").slider("option", "value", theLayer.opacity);
+		}
 	});
 	(function() {
 		theLayer = getLayerOpenLayers($('#opacitydll').val());
-		if (theLayer) $("#opacitySlider").slider("option", "value", theLayer.opacity);
+		if (theLayer) {
+			$("#opacitySlider").slider("option", "value", theLayer.opacity);
+		}
 	})();
 	$('#opacitySlider').sliderLabels('MAP', 'DATA');
 
@@ -299,8 +307,11 @@ function addMapLayers(layersArray) {
 /*  Handle toolbar events  */
 
 function toolbar(tool) {
-	if (tool.attr("id") == "identify") map.events.register("click", map, identify);
-	else map.events.unregister('click', map, identify);
+	if (tool.attr("id") === "identify") {
+		map.events.register("click", map, identify);
+	} else {
+		map.events.unregister('click', map, identify);
+	}
 }
 
 /*  Get map layer from leaflet  */
@@ -308,7 +319,9 @@ function toolbar(tool) {
 function getLayerOpenLayers(layerName) {
 	var theLayer = null;
 	$.each(map.layers, function(index, val) {
-		if (val.name == layerName) theLayer = val;
+		if (val.name === layerName) {
+			theLayer = val;
+		}
 	});
 	return theLayer;
 }
@@ -420,7 +433,9 @@ function addMarker(data) {
 	var markerLayer = getLayerOpenLayers("Map Markers");
 	feats = markerLayer.features;
 	for (i = 0; i < feats.length; i++) {
-		if (feats[i].attributes.type == data.featuretype) markerLayer.removeFeatures(feats[i]);
+		if (feats[i].attributes.type === data.featuretype) {
+			markerLayer.removeFeatures(feats[i]);
+		}
 	}
 	// Add new feature
 	point = new OpenLayers.Geometry.Point(data.lon, data.lat);
