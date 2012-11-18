@@ -1,7 +1,7 @@
 /*global OpenLayers:false map:false config:false */
 /*
     This file handles map initialization and events.
-    @author  Tobin Bradley
+    @author  Tobin Bradley, Jim White
     @license     MIT
 */
 
@@ -381,10 +381,17 @@ function onFeatureSelect(feature) {
 	while (map.popups.length) {
 		map.removePopup(map.popups[0]);
 	}
-	var html_str = "<b>Feature Name</b>: " + feature.cluster[0].data.fac_name + "<br>";
-	html_str += "<b>Feature Type</b>: " + feature.cluster[0].data.fac_type;
-	if (feature.cluster.length === 1) {
+
+	if (feature.cluster && feature.cluster.length === 1) {
+		var html_str = "<b>Feature Name</b>: " + feature.cluster[0].data.fac_name + "<br>";
+		html_str += "<b>Feature Type</b>: " + feature.cluster[0].data.fac_type;
 		popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), null, html_str, null, true, onPopupClose);
+		feature.popup = popup;
+		popup.minSize = new OpenLayers.Size(200, 50);
+		popup.maxSize = new OpenLayers.Size(250, 200);
+		map.addPopup(popup);
+	} else if (feature.attributes.label) {
+		popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), null, feature.attributes.label, null, true, onPopupClose);
 		feature.popup = popup;
 		popup.minSize = new OpenLayers.Size(200, 50);
 		popup.maxSize = new OpenLayers.Size(250, 200);
