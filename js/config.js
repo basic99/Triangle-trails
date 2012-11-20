@@ -55,7 +55,8 @@ var config = {
 		"maxZoom": 20,
 		"minZoom": 10,
 		"isVisible": false,
-		"isBaseLayer": false
+		"isBaseLayer": false,
+                "displayInSwitcher": false
 	}, {
 		"id": "footpaths",
 		"name": "Footpaths",
@@ -67,7 +68,8 @@ var config = {
 		"maxZoom": 20,
 		"minZoom": 10,
 		"isVisible": false,
-		"isBaseLayer": false
+		"isBaseLayer": false,
+                "displayInSwitcher": false
 	}, {
 		"id": "unpaved_roads",
 		"name": "Unpaved Roads",
@@ -79,7 +81,8 @@ var config = {
 		"maxZoom": 20,
 		"minZoom": 10,
 		"isVisible": false,
-		"isBaseLayer": false
+		"isBaseLayer": false,
+                "displayInSwitcher": false
 	},{
 		"id": "paved_roads",
 		"name": "Paved Roads, Powerlines",
@@ -91,7 +94,8 @@ var config = {
 		"maxZoom": 20,
 		"minZoom": 10,
 		"isVisible": false,
-		"isBaseLayer": false
+		"isBaseLayer": false,
+                "displayInSwitcher": false
 	},{
 		"id": "parks",
 		"name": "Parks and Managed Areas",
@@ -103,7 +107,8 @@ var config = {
 		"maxZoom": 20,
 		"minZoom": 10,
 		"isVisible": true,
-		"isBaseLayer": false
+		"isBaseLayer": false,
+                "displayInSwitcher": true
 	}, {
 		"id": "nexrad",
 		"name": "Nexrad Weather Radar",
@@ -116,7 +121,8 @@ var config = {
 		"maxZoom": 20,
 		"minZoom": 9,
 		"isVisible": false,
-		"isBaseLayer": false
+		"isBaseLayer": false,
+                "displayInSwitcher": true
 	}],
         //currently only supports one vector layer
 	"vector_map_layer": {

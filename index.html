@@ -7,7 +7,7 @@
 <!--[if lt IE 9]><html class="oldie" lang="en"><![endif]-->
 
 <title>Triangle Trails GeoPortal</title>
-<meta name="description" content="Triangle Trails web map of Greenways in Research Triangle, NC, area.">
+<meta name="description" content="Triangle Trails web map of Greenways, Bike Trails and Parks Triangle, NC, area.">
 <meta name="author" content="Jim White">
 
 <meta content="all" name="robots" />
@@ -41,11 +41,11 @@
 
 <header>
 <div id="logo" class="logo alignleft">
-<img src="img/trtrails_logo.png" />
+<img alt="Triangle Trails Logo" src="img/trtrails_logo.png" />
 </div>
 
 <div id="searchdiv" class="screen-only">
-<input id="searchinput" class="ui-corner-all" x-webkit-speech speech placeholder="Start here!" />
+<input id="searchinput" class="ui-corner-all" placeholder="Start here!" />
 <p class="mute">
 <span id="gpsarea" class="hidden">
 <a href="javascript:void(0)" id="gps">Find My Location</a> &bull;
@@ -81,12 +81,21 @@
 <aside>
 
 <div id="accordion-data" class="accordion hidden">
-<h3 id="WELCOME"><a href="javascript:void(0)">Welcome</a></h3>
+<h3 id="WELCOME"><a href="javascript:void(0)">Welcome, Credits and Disclaimer</a></h3>
 <div>
 <p>
-GeoPortal is made possible through the work of much smarter people than myself. An enormous hat tip to <a href="http://jquery.com/">jQuery</a>, <a href="http://jqueryui.com/">jQuery UI</a>, <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>, <a href="http://www.postgresql.org/">PostgreSQL</a>, <a href="http://postgis.org/">PostGIS</a>, <a href="http://geoserver.org/">GeoServer</a>, <a href="http://leaflet.cloudmade.com/">Leaflet</a>, <a href="http://inkscape.org/">Inkscape</a>, <a href="http://www.gimp.org/">GIMP</a>, and likely a dozen other sources I've borrowed/stolen code from over the years.
+The Triangle Trails Web Map GeoPortal is made possible through the work of much smarter people than us. We greatly appreciate the hard work of Tobin Bradley <a href="http://fuzzytolerance.info/">Fuzzy Tolerance</a> who made his project source code availbable on github in the true spirit of the open source community. 
+</p><p><strong><a href="https://github.com/basic99/Triangle-trails">You can download our source code here.</a></strong></p>
+
+<p>
+The data contained herein was gathered through publically available sources including <a href="http://www.nconemap.com/">NC One Map</a>, <a href="http://www.wakegov.com/gis/Pages/default.aspx">Wake County GIS</a>, <a href="http://www.ncparks.gov">and the NC Division of Parks and Recreation</a> 
 </p>
-<p><strong><a href="https://github.com/tobinbradley">Fork me on Github</a></strong></p>
+
+<p><strong>
+This web mapping portal is for recreational and planning purposes only.  It is not intended for navigation.  
+</strong></p>
+
+  
 
 <div>
 <h5>Search Results</h5>
@@ -94,7 +103,7 @@ GeoPortal is made possible through the work of much smarter people than myself. 
 </div>
 </div>
 
-<h3 id="FACILITIES"><a href="javascript:void(0)">Facilities</a></h3>
+<h3 id="FACILITIES"><a href="javascript:void(0)">Umstead Park Facilities</a></h3>
 <div>
 
 <div id="parks" >
@@ -102,7 +111,15 @@ GeoPortal is made possible through the work of much smarter people than myself. 
 </div>
 
 </div>
-<h3 id="MAPCONTROLS"><a href="javascript:void(0)">Map Controls</a></h3>
+<h3 id="TRAILS"><a href="javascript:void(0)">Roads and Trails</a></h3>
+<div>
+
+<div id="roadsntrails" >
+
+</div>
+
+</div>
+<h3 id="MAPCONTROLS"><a href="javascript:void(0)">Base Map Layers</a></h3>
 <div class="textcenter">
 <div id="layer_switch_ctl"></div>
 <h5 class="opacityControl">Layer Opacity</h5>
@@ -144,7 +161,7 @@ production library
 
 <!-- The following content is not displayed at run time -->
 
-<!-- Welcome screen - jQuery UI Dialog -->
+<!-- Welcome screen - jQuery UI Dialog 
 <div id="search-dialog" title="Search Help" class="hidden">
 <p class="textcenter">
 <iframe width="350" height="262" src="http://www.youtube-nocookie.com/embed/aGlmVQXRRj4?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -157,6 +174,7 @@ Select a match using either the mouse or the up/down arrow keys and Enter.
 <p><span class="ui-icon ui-icon-circle-check alignleft"></span><strong>Place or Street</strong>: Enter any part of a place or street name. Ex: type <em>carolina</em></p>
 <p><span class="ui-icon ui-icon-circle-check alignleft"></span><strong>Intersection</strong>: Enter a street name, followed by an &amp;. Ex: type <em>ruth &amp;</em></p>
 <p><span class="ui-icon ui-icon-circle-check alignleft"></span><strong>Parcel ID</strong>: Enter an 8-digit Parcel ID. Ex: type <em>11111111</em></p>
+</div>-->
 </div>
 
 

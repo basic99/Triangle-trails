@@ -94,9 +94,37 @@ function initializeMap() { /*  initialze map  */
 		html_str += "<input type='radio' name='facilities' id='" + value.val + "' /><label for='" + value.val + "'>" + value.title + "</label><br>";
 	});
 	$("#parks").html(html_str);
+	html_str = '';
+	$.each(config.overlay_map_layers, function(index, value) {
+		if (value.displayInSwitcher === false) {
+			html_str += "<input type='checkbox' value='" + value.name + "' id='" + value.id + "' /><label for='" + value.id + "'>" + value.name + "</label><br>";
+		}
+	});
+	$("#roadsntrails").html(html_str);
 
+	$("#roadsntrails input:checkbox").change(function() {
+		var chkd_layers = $("#roadsntrails input:checked");
+		var trail_layers = $("#roadsntrails input");
+		var vals, chkd_vals, show_layer;
+		$.each(trail_layers, function(index, value) {
+			vals = $(value).attr("value");
+			show_layer = false;
+			$.each(chkd_layers, function(index, value) {
+				chkd_vals = $(value).attr("value");
+				if (chkd_vals.indexOf(vals) !== -1) {
+					show_layer = true;
+				}
+			});
+			theLayer = getLayerOpenLayers(vals);
+			if (show_layer) {
+				theLayer.setVisibility(true);
+			} else {
+				theLayer.setVisibility(false);
+			}
+		});
+	});
 
-	$("#parks input").click(function() {
+	$("#parks input").change(function() {
 		var selected = $("#parks input:checked").attr("id");
 		vector_layer.filter = null;
 		if (selected.indexOf('allfac') !== -1) {
@@ -291,7 +319,8 @@ function addMapLayers(layersArray) {
 				minZoomLevel: value.minZoom,
 				maxZoomLevel: value.maxZoom,
 				attribution: value.attribution,
-				projection: value.projection
+				projection: value.projection,
+				displayInLayerSwitcher: value.displayInSwitcher
 
 			});
 		}
