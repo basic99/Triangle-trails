@@ -17,8 +17,29 @@
     padding-left: 25px;
 }
 
+#locbutton-mobile {
+    display: none;
+}
 
-
-#mylocation {
+.mylocation {
     float: left;
+    /*visibility: hidden;*/
+}
+
+@media screen and (max-width: 780px) {
+ 
+ header {
+    display: none;
+ }
+ #locbutton-mobile {
+    position: absolute;   
+    top: 300px;
+    left: 10px;
+    height: 40px;
+    width: 200px;
+    display: block;
+    }
+    aside {
+        top: 330px;
+    }
 }

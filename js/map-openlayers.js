@@ -222,9 +222,10 @@ function initializeMap() { /*  initialze map  */
 
 
 	/*  Locate user position via GeoLocation API  */
+	$(".mylocation").hide();
 	if (Modernizr.geolocation) {
-		$("#mylocation").show();
-		$("#mylocation").click(function() {
+		$(".mylocation").show();
+		$(".mylocation").click(function() {
 			navigator.geolocation.getCurrentPosition(
 
 			function(position) {

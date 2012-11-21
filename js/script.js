@@ -81,7 +81,7 @@ $(document).ready(function() {
 
     //  Map toolbar
     $("#mapcontrols").buttonset();
-    $("#mylocation").button();
+    $(".mylocation").button();
     $("#mapcontrols input:radio").click(function() {
         toolbar($(this));
     });
