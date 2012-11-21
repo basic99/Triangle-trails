@@ -8,10 +8,17 @@
     padding: 5px;
 }
 
-#mapcontrols.ui-buttonset {
-    visibility: hidden;
+#mapcontrols, #searchdiv {
+    /*visibility: hidden;*/
+    display: none;
 }
 
-#parks, #roadsntrails {
+#parks, #roadsntrails, #help_txt {
     padding-left: 25px;
+}
+
+
+
+#mylocation {
+    float: left;
 }

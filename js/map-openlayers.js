@@ -223,8 +223,8 @@ function initializeMap() { /*  initialze map  */
 
 	/*  Locate user position via GeoLocation API  */
 	if (Modernizr.geolocation) {
-		$("#gpsarea").show();
-		$("#gps").click(function() {
+		$("#mylocation").show();
+		$("#mylocation").click(function() {
 			navigator.geolocation.getCurrentPosition(
 
 			function(position) {

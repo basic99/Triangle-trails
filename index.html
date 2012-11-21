@@ -60,22 +60,25 @@
 <div id="map-container">
 
 <div id="toolbar" class="screen-only hidden">
+	
 <div id="mapcontrols">
 <input type="radio" id="navigate" name="mapcontrol-button" value="none" checked="checked" />
 <label for="navigate">Navigate</label>
 <input type="radio" id="identify" name="mapcontrol-button" value="identify" />
 <label for="identify">Identify</label>
 </div>
+<button id="mylocation">My Location</button>
 <div id="toolbar-text-output" class="alignright textright">
 <span id="toolbar-area"></span>
 <span id="toolbar-length"></span>
 <br />
 <span id="toolbar-coords"></span>
 </div>
+
 </div>
 
 <div id="map" class="ui-corner-all"></div>
-</div>
+</div> <!-- end map-container -->
 
 
 <aside>
@@ -97,10 +100,7 @@ This web mapping portal is for recreational and planning purposes only.  It is n
 
   
 
-<div>
-<h5>Search Results</h5>
-<span class="selectedLocation">No records selected.</span>
-</div>
+
 </div>
 
 <h3 id="FACILITIES"><a href="javascript:void(0)">Umstead Park Facilities</a></h3>
@@ -125,6 +125,14 @@ This web mapping portal is for recreational and planning purposes only.  It is n
 <h5 class="opacityControl">Layer Opacity</h5>
 <select id="opacitydll" class="opacityControl"></select>
 <div id="opacitySlider" class="opacityControl"></div>
+</div>
+<h3 id="HELP"><a href="javascript:void(0)">Help</a></h3>
+<div>
+
+<div id="help_txt" >
+Put help text here!
+</div>
+
 </div>
 </div>
 
@@ -159,22 +167,7 @@ production library
 <script src="js/script.js"></script>
 
 
-<!-- The following content is not displayed at run time -->
 
-<!-- Welcome screen - jQuery UI Dialog 
-<div id="search-dialog" title="Search Help" class="hidden">
-<p class="textcenter">
-<iframe width="350" height="262" src="http://www.youtube-nocookie.com/embed/aGlmVQXRRj4?rel=0" frameborder="0" allowfullscreen></iframe>
-</p>
-<p>
-Type in the first part of an address or location and <em>let the search box do the work for you</em>.
-Select a match using either the mouse or the up/down arrow keys and Enter.
-</p>
-<p><span class="ui-icon ui-icon-circle-check alignleft"></span><strong>Address</strong>: Enter the first part of the address. Ex: for 700 North Tryon Street, try <em>700 n</em></p>
-<p><span class="ui-icon ui-icon-circle-check alignleft"></span><strong>Place or Street</strong>: Enter any part of a place or street name. Ex: type <em>carolina</em></p>
-<p><span class="ui-icon ui-icon-circle-check alignleft"></span><strong>Intersection</strong>: Enter a street name, followed by an &amp;. Ex: type <em>ruth &amp;</em></p>
-<p><span class="ui-icon ui-icon-circle-check alignleft"></span><strong>Parcel ID</strong>: Enter an 8-digit Parcel ID. Ex: type <em>11111111</em></p>
-</div>-->
 </div>
 
 
