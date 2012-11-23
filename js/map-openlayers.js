@@ -19,7 +19,14 @@ function initializeMap() { /*  initialze map  */
 		div: "map",
 		projection: "EPSG:900913",
 		displayProjection: "EPSG:4326",
-		fallThrough: false
+		fallThrough: false,
+		controls: [new OpenLayers.Control.Zoom({}), new OpenLayers.Control.Navigation({
+			zoomWheel: true,
+			mouseWheelOptions: {
+				interval: 20
+			},
+			zoomBoxEnabled: true
+		})]
 	});
 
 	/*  Add map layers  */
