@@ -23,11 +23,13 @@ function initializeMap() { /*  initialze map  */
 		controls: [new OpenLayers.Control.Zoom({}), new OpenLayers.Control.Navigation({
 			zoomWheel: true,
 			mouseWheelOptions: {
-				interval: 20
+				interval: 100
 			},
 			zoomBoxEnabled: true
 		})]
 	});
+	var nav = map.getControlsByClass("OpenLayers.Control.Navigation")[0];
+	nav.handlers.wheel.cumulative = false;
 
 	/*  Add map layers  */
 
