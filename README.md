@@ -1,34 +1,34 @@
 
-Triangle-trails
-===============
+# Triangle-trails
 
 Web mapping application based on GeoPortal and OpenLayers
 
-Notes
-==================================================
+# Notes
 
-Import of shapefiles into database examples. I used PostGIS geography coordinates. There are other ways to do this, but this is how I did it.
+### Import of shapefiles into database examples.
 
-shp2pgsql -G  Points_Edited__for_Symbols.shp > facilities.sql
+I used PostGIS geography coordinates. There are other ways to do this, but this is how I did it.
+
+shp2pgsql -G  Points_Edited__for_Symbols.shp > facilities.sql, 
 psql -d greenways -f /tmp/facilities.sql
 
-If date field may need to do this
+If date field may need to do this: 
 ogr2ogr Umstead_Points  Umstead_Points_10_02.shp -nlt MultiLineString -fieldTypeToString date -nln Umstead_Points
 
 
-Server configuration
+### Server configuration
 
 ProxyPass /geoserver http://192.168.10.50:8080/geoserver
 
 You will need to add something like this to your httpd.conf file so that geoserver is running on the same url and port as the web site. If you try to run off of port 8080 the OpenLayers.Protocol.WFS calls will fail due to JavaScript restrictions.
 
-Editing config.js
+### Editing config.js
 
 As much as possible after setting up GeoServer the site configuration is done by editing the js/config.js file. 
 
 Configuration of the base_map_layers and overlay_map_layers sections are fairly straightforward with the exception that overlay_map_layers set to "displayInSwitcher": false will be able to be selected in the Roads and Trails section instead of the Base Map Layers section. The name attribute for these layers will be the name displayed in the switchers. The wmsurl parameter should be edited to point to your data.
 
-Configuring the vector_map_layer
+#### Configuring the vector_map_layer
 
 The points layer that displays facilities is the most complicated since it requires certain columns set up in certain ways.
 
