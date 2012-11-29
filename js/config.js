@@ -33,7 +33,7 @@ var config = {
 		"numZoomLevels": 16
 	},{
 		"id": "nconemap",
-		"name": "NC OneMap",
+		"name": "2010 NC Ortho Photos",
 		"wmsurl": "http://imagery.nconemap.com/arcgis/services/2010_Orthoimagery/ImageServer/WMSServer",
 		"layers": "",
 		"format": "image/png",
