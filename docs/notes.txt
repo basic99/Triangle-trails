@@ -23,7 +23,7 @@ Configuration of the base_map_layers and overlay_map_layers sections are fairly 
 
 The points layer that displays facilities is the most complicated since it requires certain columns set up in certain ways.
 
-The configurable column "switchColumn": "switch_val" is the name of a column in the points layer. The Facilities section of the program will display the switchVals title values as selections in that section. The corresponding val, eg. "val": "allfac" will select points to display for that selection based on the value in the switch_val column for those points. In this selection all points with allfac in the switch_val column will be displayed.
+The configurable column "switchColumn": "switch_val" is the name of a column in the points layer. The Facilities section of the program will display the switchVals title values as selections in that section. The corresponding val, eg. "val": "toilets" will select points to display for that selection based on the value in the switch_val column for those points. In this selection all points with toilets in the switch_val column will be displayed.
 
 In order to display the appropriate park symbol with the points we use the symbol column of the points layer.  Values such as Airport,  Campsite,  First_Aid,  Food,  or Ranger_Facility in this column must correpond to park icons in the img/parksymbols directory named Airport.png,  Campsite.png,  First_Aid.png,  Food.png,  Ranger_Facility.png, etc.
 
