@@ -169,6 +169,18 @@ function initializeMap() { /*  initialze map  */
 		}
 	});
 
+	//for ge.js
+	map.events.register("moveend", map, function(e) {
+		mapactive = $("#accordion-map h3").eq($('#accordion-map').accordion('option', 'active')).attr("id");
+		console.log(mapactive);
+		if (mapactive == "STREETVIEW") {
+			widgetMaps("Google Street View", map.getCenter(), false);
+		}
+		if (mapactive == "EARTH") {
+			widgetMaps("Google Earth", map.getCenter(), false);
+		}
+	});
+
 
 	/*  Set map center and zoom  */
 	map.setCenter(new OpenLayers.LonLat(config.default_map_center[1], config.default_map_center[0]).transform(
