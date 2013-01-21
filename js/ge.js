@@ -7,9 +7,20 @@
  * @param {boolean} reset
  */
 
+var ge, streetview;
+google.load("earth", "1");
+/*
+  function initCB(instance) {
+      ge = instance;
+      ge.getWindow().setVisibility(true);
+    }
+function failureCB(errorCode) {
+    }
+*/
 function widgetMaps(maptype, longlat, reset) {
 	var lonlatGCS = OpenLayers.Layer.SphericalMercator.inverseMercator(longlat.lon, longlat.lat);
 	if (maptype == "Google Street View") {
+		console.log("hello");
 		if (streetview == null || reset) {
 			streetview = new google.maps.StreetViewPanorama(document.getElementById("widget-streetview"));
 		}
@@ -27,11 +38,10 @@ function widgetMaps(maptype, longlat, reset) {
 		});
 	} else if (maptype == "Google Earth") {
 		if (ge == null || reset) {
-			$("#widget-earth").empty();
-			google.earth.createInstance('widget-earth', function(instance) {
+			$("#map3d").empty();
+			google.earth.createInstance('map3d', function(instance) {
 				ge = instance;
 				instance.getWindow().setVisibility(true);
-
 				ge.getLayerRoot().enableLayerById(ge.LAYER_BUILDINGS, true);
 				ge.getLayerRoot().enableLayerById(ge.LAYER_TERRAIN, true);
 				geZoom(longlat);
@@ -78,11 +88,12 @@ map.events.register("moveend", map, function(e) {
 /*  Run Code When Active Map Accordion Changes  */
 
 function processAccordionMapChange(accordionValue) {
+	
 	switch (accordionValue) {
 	case "STREETVIEW":
 		widgetMaps("Google Street View", map.getCenter(), true);
 		break;
-	case "EARTH":
+	case "GOOGLEEARTH":
 		widgetMaps("Google Earth", map.getCenter(), true);
 		break;
 	}

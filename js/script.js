@@ -111,6 +111,7 @@ $(document).ready(function() {
     $.subscribe("/change/selected", zoomToLonLat); // Zoom to Location
     $.subscribe("/change/selected", addMarker); // Add Marker
     $.subscribe("/change/accordion", processAccordionDataChange); // Change accordion
+    $.subscribe("/change/accordion", processAccordionMapChange); // Change accordion
     $.subscribe("/layers/addmarker", zoomToLonLat); // Zoom to location
     $.subscribe("/layers/addmarker", addMarker); // Add marker
     $.subscribe("/map/panzoom", zoomToLonLat); // Zoom to location

@@ -171,12 +171,11 @@ function initializeMap() { /*  initialze map  */
 
 	//for ge.js
 	map.events.register("moveend", map, function(e) {
-		mapactive = $("#accordion-map h3").eq($('#accordion-map').accordion('option', 'active')).attr("id");
-		console.log(mapactive);
+		mapactive = $("#accordion-data h3").eq($('#accordion-data').accordion('option', 'active')).attr("id");
 		if (mapactive == "STREETVIEW") {
 			widgetMaps("Google Street View", map.getCenter(), false);
 		}
-		if (mapactive == "EARTH") {
+		if (mapactive == "GOOGLEEARTH") {
 			widgetMaps("Google Earth", map.getCenter(), false);
 		}
 	});
@@ -297,6 +296,9 @@ function initializeMap() { /*  initialze map  */
 		}
 	})();
 	$('#opacitySlider').sliderLabels('MAP', 'DATA');
+	
+	//google.earth.createInstance('map3d', initCB, failureCB);
+	widgetMaps("Google Earth", map.getCenter(), true);
 
 
 } //end initialize map

@@ -42,3 +42,9 @@
     top: 330px;
     }
 }
+
+#map3d, #widget-streetview {
+    border: solid black 1px;
+    height: 300px;
+    
+}
