@@ -1,5 +1,4 @@
 //http://fuzzytolerance.info/link-google-earth-plugin-to-openlayers/
-
 /**
  * Handle widget map creation and panning
  * @param {string} maptype
@@ -20,7 +19,6 @@ function failureCB(errorCode) {
 function widgetMaps(maptype, longlat, reset) {
 	var lonlatGCS = OpenLayers.Layer.SphericalMercator.inverseMercator(longlat.lon, longlat.lat);
 	if (maptype == "Google Street View") {
-		console.log("hello");
 		if (streetview == null || reset) {
 			streetview = new google.maps.StreetViewPanorama(document.getElementById("widget-streetview"));
 		}
@@ -88,7 +86,7 @@ map.events.register("moveend", map, function(e) {
 /*  Run Code When Active Map Accordion Changes  */
 
 function processAccordionMapChange(accordionValue) {
-	
+
 	switch (accordionValue) {
 	case "STREETVIEW":
 		widgetMaps("Google Street View", map.getCenter(), true);

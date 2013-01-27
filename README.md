@@ -18,7 +18,8 @@ ogr2ogr Umstead_Points  Umstead_Points_10_02.shp -nlt MultiLineString -fieldType
 
 ### Server configuration
 
-ProxyPass /geoserver http://192.168.10.50:8080/geoserver
+ProxyPass /geoserver http://foo.example.com:8080/geoserver
+ProxyPassReverse /geoserver http://foo.example.com:8080/geoserver
 
 You will need to add something like this to your httpd.conf file so that geoserver is running on the same url and port as the web site. If you try to run off of port 8080 the OpenLayers.Protocol.WFS calls will fail due to JavaScript restrictions.
 

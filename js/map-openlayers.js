@@ -296,9 +296,12 @@ function initializeMap() { /*  initialze map  */
 		}
 	})();
 	$('#opacitySlider').sliderLabels('MAP', 'DATA');
+
 	
-	//google.earth.createInstance('map3d', initCB, failureCB);
-	widgetMaps("Google Earth", map.getCenter(), true);
+	if((document.URL).indexOf("GOOGLEEARTH") != -1){
+		widgetMaps("Google Earth", map.getCenter(), true);
+	}
+	
 
 
 } //end initialize map

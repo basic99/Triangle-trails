@@ -1,6 +1,6 @@
 var config = {
 	"web_service_base": "http://maps.co.mecklenburg.nc.us/rest/",
-	"geoserver_base": "http://jimserver.net/geoserver",
+	"geoserver_base": "http://localhost/geoserver",
 	//TD
 	"default_map_center": [35.853, -78.746],
 	"default_map_zoom": 12,
@@ -47,7 +47,7 @@ var config = {
 	"overlay_map_layers": [{
 		"id": "trails",
 		"name": "Named Trails",
-		"wmsurl": "http://jimserver.net/geoserver/wms",
+		"wmsurl": "http://localhost/geoserver/wms",
 		"layers": "umstead_named_trails",
 		"format": "image/png",
 		"transparent": true,
@@ -60,7 +60,7 @@ var config = {
 	}, {
 		"id": "footpaths",
 		"name": "Footpaths",
-		"wmsurl": "http://jimserver.net/geoserver/wms",
+		"wmsurl": "http://localhost/geoserver/wms",
 		"layers": "footpaths",
 		"format": "image/png",
 		"transparent": true,
@@ -73,7 +73,7 @@ var config = {
 	}, {
 		"id": "unpaved_roads",
 		"name": "Unpaved Roads",
-		"wmsurl": "http://jimserver.net/geoserver/wms",
+		"wmsurl": "http://localhost/geoserver/wms",
 		"layers": "unpaved_roads",
 		"format": "image/png",
 		"transparent": true,
@@ -86,7 +86,7 @@ var config = {
 	},{
 		"id": "paved_roads",
 		"name": "Paved Roads, Powerlines",
-		"wmsurl": "http://jimserver.net/geoserver/wms",
+		"wmsurl": "http://localhost/geoserver/wms",
 		"layers": "paved_roads,powerline",
 		"format": "image/png",
 		"transparent": true,
@@ -99,7 +99,7 @@ var config = {
 	},{
 		"id": "parks",
 		"name": "Parks and Managed Areas",
-		"wmsurl": "http://jimserver.net/geoserver/wms",
+		"wmsurl": "http://localhost/geoserver/wms",
 		"layers": "umstead_line",
 		"format": "image/png",
 		"transparent": true,
@@ -128,7 +128,7 @@ var config = {
 	"vector_map_layer": {
 		"id": "facilities",
 		"name": "Facilities",
-		"wfsurl": "http://jimserver.net/geoserver/wfs",
+		"wfsurl": "http://localhost/geoserver/wfs",
 		"layers": "facilities",
 		"switchColumn": "switch_val",
 		"switchVals": [{
